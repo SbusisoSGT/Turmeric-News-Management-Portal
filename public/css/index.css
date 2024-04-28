@@ -25,6 +25,16 @@
     color: #db9500;
 }
 
+.news-card-details a{
+    text-decoration: none;
+    color: #db9500;
+}
+
+.news-card-details a:hover{
+    text-decoration: underline;
+    color: #db9500;
+}
+
 .news-card-details .news-summary{
     font-size: 1.1rem;
     line-height: 2rem;

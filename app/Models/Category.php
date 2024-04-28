@@ -19,15 +19,13 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'link' ];
+    protected $fillable = ['name'];
 
     /**
-     * Get the articles that have this tag
-     *
-     * @return App\Models\Article $articles
+     * Get the articles that belong to this category has posted
      */
     public function articles()
     {
-        return $this->belongsToMany('App\Models\Article');
+        return $this->hasMany('App\Models\Article');
     }
 }

@@ -14,6 +14,22 @@ class AuthController extends Controller
     /**
      * register profile for a given user.
      */
+    public function showLogin(): View
+    {
+        return view('auth.login');
+    }
+
+    /**
+     * register profile for a given user.
+     */
+    public function showRegister(): View
+    {
+        return view('auth.register');
+    }
+
+    /**
+     * register profile for a given user.
+     */
     public function register(Request $request): RedirectResponse
     {
         $user = User::create([

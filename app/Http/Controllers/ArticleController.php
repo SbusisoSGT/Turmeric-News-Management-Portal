@@ -13,18 +13,59 @@ class ArticleController extends Controller
 {
     use ImageUploaderTrait;
 
+
+     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $articles = Article::where('approved', 1)->get();
+
+        return view('index')
+                ->with('articles', $articles); 
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function category(string $category)
+    {
+        $category = Category::where('name', $category)->firstOrFail();
+
+        $articles = $category->articles()->where('approved', 1)->get();
+
+        return view('blog.category')
+                ->with('articles', $articles); 
+    }
+
      /**
      * Display the specified resource.
      *
      * @param  string  $article_link
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($article_link)
     {
-        // $article = Article::where(['link' => $article, 'approved' => 1])->firstOrFail();
-        $article = Article::first();
+        $article = Article::where(['link' => $article_link, 'approved' => 1])->firstOrFail();
         
         return view('blog.show')->with('article', $article); 
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  string  $article_link
+     * @return \Illuminate\Http\Response
+     */
+    public function admin()
+    {   
+        $articles = Article::all();
+        
+        return view('blog.admin')->with('articles', $articles); 
     }
 
     /**

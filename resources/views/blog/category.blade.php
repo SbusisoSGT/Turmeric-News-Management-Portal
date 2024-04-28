@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('page-name', "")
+@section('page-name', $articles->first()->category->name)
 
 @section('page-includes')
 <link rel="stylesheet" href={{ asset('css/index.css') }}>
@@ -8,13 +8,13 @@
 
 @section('content')
 <div class="main-content">
-    <h1 class="h2">Trending News</h1>
+    <h1 class="h2">{{ $articles->first()->category->name }} News</h1>
     <div class="news-card-container" id="main-news-card">
         <a href="/news/article/{{$articles->first()->link}}">
             <img src={{ asset('storage/covers/'.$articles->first()->cover_image)}} alt="">
         </a>
         <div class="news-card-details">
-            <a href="/news/categories/{{$articles->first()->category->name}}">
+			<a href="/news/categories/{{$articles->first()->category->name}}">
                 <span class="news-publication">{{$articles->first()->category->name}}</span>
             </a>
             <h2 class="news-title">{{$articles->first()->title}}</h2>
@@ -38,9 +38,9 @@
                     <img src="{{ asset('storage/covers/'.$articles[$i]->cover_image)}}" alt="">
                 </a>
                 <div class="news-card-details">
-                    <a href="/news/categories/{{$articles[$i]->category->name}}">
-                        <span class="news-publication">{{$articles[$i]->category->name}}</span>
-                    </a>
+					<a href="/news/categories/{{$articles[$i]->category->name}}">
+						<span class="news-publication">{{$articles[$i]->category->name}}</span>
+					</a>
                     <h2 class="news-title">{{$articles[$i]->title}}</h2>
                     <p class="news-summary">
                         {{Str::substr($articles[$i]->body, 3, 300)}} . . . 

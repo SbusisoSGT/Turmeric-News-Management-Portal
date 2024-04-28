@@ -82,6 +82,16 @@
     color: #db9500;
 }
 
+.article-body a{
+    text-decoration: none;
+    color: #db9500;
+}
+
+.article-body a:hover{
+    text-decoration: underline;
+    color: #db9500;
+}
+
 .article-title{
 	color: #202020;
 	/* font-size: 2.3rem;

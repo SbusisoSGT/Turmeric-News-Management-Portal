@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('page-name', "")
+@section('page-name', $article->title)
 
 @section('page-includes')
 	<link rel="stylesheet" href={{asset("css/blog/show.css") }}>
@@ -9,7 +9,9 @@
 @section('content')
 	<div class="article-container">
 		<div class="article-body">
-			<span class="news-category">Economy</span>
+			<a href="/news/categories/{{$article->category->name}}">
+                <span class="news-category">{{$article->category->name}}</span>
+            </a>
 			<span class="h1 article-title">
 				{{$article->title}}
 			</span>

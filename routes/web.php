@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
+use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,26 +16,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
-
-Route::get('/register', function () {
-    return view('auth.register');
-});
-
-Route::post('/register', [AuthController::class, 'register']);
-
-Route::get('/login', function () {
-    return view('auth.login');
-});
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/register', 'showRegister')->name('register');
  
-Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/login', 'showLogin')->name('login');
+    
+    Route::post('/register', 'register');
+ 
+    Route::post('/login', 'login');
 
-Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/logout', 'logout')->middleware('auth');
+});
 
-Route::get('/news/article/', [ArticleController::class, 'show']);
 
-Route::get('/news/article/new', [ArticleController::class, 'create']);
+Route::controller(ArticleController::class)->group(function () {
+    Route::get('/', 'index');
 
-Route::post('/news/article/store', [ArticleController::class, 'store']);
+    Route::get('/news/categories/{category}', 'category');
+
+    Route::get('/news/article/{article_link}', 'show');
+
+    Route::get('/news/create', 'create')->can('create', Article::class);
+
+    Route::get('/news/admin', 'admin')->can('approve', Article::class);
+
+    Route::post('/news/article/store', 'store')->middleware('auth');
+});
+
+
