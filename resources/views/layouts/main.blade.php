@@ -28,7 +28,10 @@
                     </div>
                 @elsecan('approve', App\Models\Article::class)
                     <div class="col-4 pt-1 blog-header-action">
-                        <a class="link-secondary" href="/news/admin">Admin</a>
+                        <a class="link-secondary" href="/news/admin">
+                            <span>Admin</span>
+                            <img src={{ asset('icons/person.svg') }}>
+                        </a>
                     </div>
                 @endcan   
             <div class="d-flex justify-content-center col-4 text-center">
@@ -58,7 +61,7 @@
             <a class="p-2 link-secondary" href="/news/categories/economy">Economy</a>
             <a class="p-2 link-secondary" href="/news/categories/politics">Politics</a>
             <a class="p-2 link-secondary" href="/news/categories/business">Business</a>
-            <a class="p-2 link-secondary" href="/news/categories/markets">Market</a>
+            <a class="p-2 link-secondary" href="/news/categories/markets">Markets</a>
           </nav>
         </div>
     </div>

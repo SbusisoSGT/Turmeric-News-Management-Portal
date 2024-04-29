@@ -41,6 +41,11 @@ Route::controller(ArticleController::class)->group(function () {
     Route::get('/news/admin', 'admin')->can('approve', Article::class);
 
     Route::post('/news/article/store', 'store')->middleware('auth');
+
+    Route::post('/news/approve', 'approve')->can('approve', Article::class);
+
+    Route::post('/news/delete', 'destroy')->can('delete', Article::class);
+    
 });
 
 

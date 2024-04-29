@@ -41,10 +41,7 @@ class AuthController extends Controller
         $result = Auth::attempt(['email' => $user->email, 'password' => $request['password']]);
 
         if($result)
-            return back()->with([
-                'status' => 'success',
-                'message' => 'Profile created successfully!'
-            ]);
+            return redirect('/');
     }
 
     /**
@@ -54,12 +51,14 @@ class AuthController extends Controller
     {
         $result = Auth::attempt(['email' => $request['email'], 'password' => $request['password']]);
 
-        if($result){
-            return back()->with([
-                'status' => 'success',
-                'message' => 'Login successful!'
-            ]);
-        }
+        if($result)
+            return redirect('/');
+
+        return back()->with([
+            'status' => 'failed',
+            'message' => 'Incorrect email or password! Try again. '
+        ]);
+
     }
 
     /**

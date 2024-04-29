@@ -1,7 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.main')
+
+@section('page-includes')
+	<link rel="stylesheet" href={{asset("css/layouts/auth.css") }}>
+@endsection
 
 @section('content')
-<div class="container">
+<div class="container" style="margin-top: 4rem">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">

@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Traits\ImageUploaderTrait;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -56,7 +57,10 @@ class ArticleController extends Controller
      */
     public function show($article_link)
     {
-        $article = Article::where(['link' => $article_link, 'approved' => 1])->firstOrFail();
+        if( Auth::check() && Auth::user()->role->name == 'Admin')
+            $article = Article::where(['link' => $article_link])->firstOrFail();
+        else
+            $article = Article::where(['link' => $article_link, 'approved' => 1])->firstOrFail();
         
         return view('blog.show')->with('article', $article); 
     }
@@ -69,7 +73,7 @@ class ArticleController extends Controller
      */
     public function admin()
     {   
-        $articles = Article::all();
+        $articles = Article::latest()->get();
         
         return view('blog.admin')->with('articles', $articles); 
     }
@@ -85,6 +89,26 @@ class ArticleController extends Controller
 
         return view('blog.create')
                 ->with('categories', $categories);
+    }
+
+    /**
+     * Approve articles published by authors
+     *
+     * @param  App\Http\Requests\StoreArticles  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function approve(Request $request)
+    {
+        $article = Article::find($request->input('article_id'));
+
+        $article->approved = 1;
+        $article->save();
+        
+        return back()
+                    ->with([
+                        'articles', Article::latest()->get(),
+                        'status' => 'Article approved successfully!'
+                ]); 
     }
 
     /**
@@ -110,5 +134,24 @@ class ArticleController extends Controller
 
         return redirect()->back()
                 ->with('success', 'Article created successfully! Awaiting approval.');
+    }
+
+      /**
+     * Delete an article published by author
+     *
+     * @param  App\Http\Requests\StoreArticles  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
+    {
+        $article = Article::find($request->input('article_id'));
+
+        $article->delete();
+        
+        return back()
+                ->with([
+                    'articles', Article::latest()->get(),
+                    'status' => 'Article deleted successfully!'
+            ]); 
     }
 }
