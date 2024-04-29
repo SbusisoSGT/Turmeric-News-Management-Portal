@@ -21,7 +21,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::where('approved', 1)->get();
+        $articles = Article::where('approved', 1)
+                        ->latest()
+                        ->get();
 
         return view('index')
                 ->with('articles', $articles); 
@@ -36,7 +38,11 @@ class ArticleController extends Controller
     {
         $category = Category::where('name', $category)->firstOrFail();
 
-        $articles = $category->articles()->where('approved', 1)->get();
+        $articles = $category
+                        ->articles()
+                        ->where('approved', 1)
+                        ->latest()
+                        ->get();
 
         return view('blog.category')
                 ->with('articles', $articles); 

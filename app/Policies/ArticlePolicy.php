@@ -15,7 +15,7 @@ class ArticlePolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasAnyRoles(['Author', 'Admin']);
+        return $user->hasRole('Author');
     }
 
     /**
@@ -25,6 +25,17 @@ class ArticlePolicy
      * @return boolean
      */
     public function approve(User $user): bool
+    {
+        return $user->hasRole('Admin');
+    }
+
+     /**
+     * Determine whether the user can delete published articles.
+     * 
+     * @param App\Models\User $user
+     * @return boolean
+     */
+    public function delete(User $user): bool
     {
         return $user->hasRole('Admin');
     }

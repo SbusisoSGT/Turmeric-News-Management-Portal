@@ -1,0 +1,165 @@
+.nav-scroller{
+    border-top: 1px solid #c8c8c8;
+    border-bottom: 1px solid #c8c8c8;
+}
+
+.nav-scroller nav a{
+    text-decoration: none;
+    font-size: 1.1rem;
+
+}
+
+.nav-container{
+    margin: 0 3rem 2rem 3rem;
+}
+
+.blog-header-action a{
+    color: #6c757d;
+    text-decoration: none;
+
+}
+
+.blog-header-action img{
+     height: 1.3rem;
+}
+
+.blog-header .site-name{
+    color: #db9500;
+    font-weight: 100;
+    font-size: 1.6rem;
+    font-family: "Dancing Script", cursive;
+    line-height: 1.6rem;
+    text-decoration: none;
+}
+
+.blog-header .auth-name{
+    margin-right: 1rem;
+    color: grey;
+}
+
+.blog-header .auth-btn{
+    border: 1px solid #db9500;
+    color: #db9500;
+    background-color: white;
+}
+
+.blog-header .auth-btn:hover{
+    background-color: #db9500;
+    color: black;
+}
+
+.footer{
+    padding-top: 2rem;
+    background-color: white;
+    color: grey;
+}
+    
+.footer-top-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: .5rem 0;
+}
+
+.logo-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+        
+    .logo-name{
+        color: #db9500;
+        font-weight: 100;
+        font-size: 1.8rem;
+        font-family: "Dancing Script", cursive;
+    }
+
+.footer-links{
+        display: flex;
+        margin-top: 1.1rem;
+}     
+
+.footer-links a{
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+
+.footer-links a:hover{
+    color: #db9500;
+}
+
+.footer-links li{
+    color: grey; 
+    list-style: none;
+    margin-right: 1rem;
+    text-decoration: none;
+}
+
+.footer-links li:hover{
+    color: #db9500;
+    text-decoration: underline;
+}
+                         
+.copyright {
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+        align-self: center;
+}
+
+.copyright p {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    font-size: 1rem;
+}
+
+.copyright .copyright-dot {
+    margin: 0 0.3rem 0 0.5rem;
+}
+
+.copyright i {
+    color: #f0f;
+    font-size: 1rem;
+}
+            
+#ht {
+    color: #5ca7f7 !important;
+}
+
+@media only screen and (max-width: 776px){
+    .nav-container{
+        margin: 0 1rem 2rem 1rem;
+    }
+
+    .nav-scroller nav a{
+        font-size: 1.0rem;
+    }
+
+    .blog-header .auth-name{
+        display: none;
+    }
+}
+
+
+
+@media only screen and (max-width: 576px){
+    .blog-header .auth-name{
+        display: none;
+    }
+
+
+    .copyright p {
+        flex-direction: column;
+    }
+    
+    .copyright .copyright-designed-with{
+        margin: .4rem;
+    }
+    
+    .copyright-dot {
+        display: none;
+    }
+}
